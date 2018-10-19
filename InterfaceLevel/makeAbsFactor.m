@@ -26,8 +26,8 @@ Fac.state.r2 = [];
 V        = V_x * Rob.state.P(1:7,1:7) * V_x';
 
 % Measurement is the straight data
-Fac.meas.y    = Rob.state.x;
-Fac.meas.R    = Rob.state.P;
+Fac.meas.y    = Rob.state.x(1:7);
+Fac.meas.R    = Rob.state.P(1:7,1:7);
 % Fac.meas.W = [];  % measurement information matrix
 
 % Expectation has zero covariance -- and info is not defined

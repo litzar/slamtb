@@ -13,7 +13,7 @@ function [Rob, Frm] = rob2frm(Rob, Frm)
 Frm.used = true;
 
 % State
-Frm.state.x = Rob.state.x;
+Frm.state.x(1:7) = Rob.state.x(1:7);
 
 
 

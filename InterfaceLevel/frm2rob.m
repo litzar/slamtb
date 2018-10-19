@@ -8,8 +8,8 @@ function Rob = frm2rob(Rob, Frm)
 %   Copyright 2015 Joan Sola @ IRI-CSIC-UPC
 
 % Transfer to Rob - ranges and values
-Rob.state.r = Frm.state.r;
-Rob.state.x = Frm.state.x;
+Rob.state.r(1:6) = Frm.state.r;
+Rob.state.x(1:7) = Frm.state.x(1:7);
 Rob.frame.x = Rob.state.x(1:7);
 Rob.frame = updateFrame(Rob.frame);
 

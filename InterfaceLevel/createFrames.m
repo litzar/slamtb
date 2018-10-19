@@ -21,11 +21,11 @@ for rob = [Rob.rob]
         Frm(rob,frm).rob         = rob;
         Frm(rob,frm).factors     = [];
         
-        Frm(rob,frm).state.x     = zeros(Rob(rob).state.size,1);
-        Frm(rob,frm).state.dx    = zeros(Rob(rob).state.dsize,1);
+        Frm(rob,frm).state.x     = zeros(7,1);
+        Frm(rob,frm).state.dx    = zeros(6,1);
         Frm(rob,frm).state.r     = [];
-        Frm(rob,frm).state.size  = Rob(rob).state.size;
-        Frm(rob,frm).state.dsize = Rob(rob).state.dsize;
+        Frm(rob,frm).state.size  = 7;
+        Frm(rob,frm).state.dsize = 6;
         Frm(rob,frm).state.M     = []; % Jacobian of projection to manifold
         
     end
