@@ -132,6 +132,16 @@ end
 %% V. Main loop
 for currentFrame = Tim.firstFrame : Tim.lastFrame
     
+    % Circular trajectory
+    theta = pi/2 - atan2(SimRob.state.x(2),SimRob.state.x(1));
+    SimRob.state.x(8) = -0.4*cos(theta);
+    SimRob.state.x(9) = 0.4*sin(theta);
+    Rob.state.x(8) = -0.4*cos(theta);
+    Rob.state.x(9) = 0.4*sin(theta);
+    
+    %SimRob.state.x(13) = 0;
+    %Rob.state.x(13) = 0;
+    
     % 1. SIMULATION
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -300,7 +310,6 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
     % TODO: do something here to collect data for post-processing or
     % plotting. Think about collecting data in files using fopen, fwrite,
     % etc., instead of creating large Matlab variables for data logging.
-    
 
 end
 
