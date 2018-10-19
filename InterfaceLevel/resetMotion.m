@@ -9,10 +9,28 @@ function Rob = resetMotion(Rob)
 %   Copyright 2015 Joan Sola @ IRI-UPC-CSIC.
 
 
-Rob.state.x = vpose2qpose(zeros(6,1));
-Rob.frame.x = Rob.state.x;
-Rob.frame = updateFrame(Rob.frame);
-Rob.state.P = zeros(7,7);
+switch Rob.motion
+    
+    case  {'constVel'} % constant velocity
+        
+        Rob.state.x(1:7) = vpose2qpose(zeros(6,1));
+        Rob.frame.x = Rob.state.x;
+        Rob.frame = updateFrame(Rob.frame);
+        %Rob.state.P = zeros(13,13);        
+        
+        
+    case  {'odometry'}  % 3D odometry
+        
+        Rob.state.x = vpose2qpose(zeros(6,1));
+        Rob.frame.x = Rob.state.x;
+        Rob.frame = updateFrame(Rob.frame);
+        Rob.state.P = zeros(7,7);
+        
+    otherwise
+        
+        error('??? Unknown motion model ''%s''.',Rob.motion);
+        
+end
 
 % ========== End of function - Start GPL license ==========
 

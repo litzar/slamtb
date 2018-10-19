@@ -22,8 +22,8 @@ Fac.state.r1 = Frm.state.r;
 Fac.state.r2 = [];
 
 % Go to minimal space, 7DoF --> 6DoF
-[e, V_x] = qpose2vpose(Rob.state.x);
-V        = V_x * Rob.state.P * V_x';
+[e, V_x] = qpose2vpose(Rob.state.x(1:7));
+V        = V_x * Rob.state.P(1:7,1:7) * V_x';
 
 % Measurement is the straight data
 Fac.meas.y    = Rob.state.x;

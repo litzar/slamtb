@@ -76,7 +76,15 @@ for rob = [Rob.rob]
     factorRob(rob) = resetMotion(Rob(rob));
     
     % Add first keyframe with absolute factor
-    Rob(rob).state.P = 1e-6 * eye(7); % Give 1cm error
+    switch Rob.motion
+        case  {'constVel'} % constant velocity
+            Rob(rob).state.P = 1e-6 * eye(13); % Give 1cm error
+        case  {'odometry'}  % 3D odometry
+            Rob(rob).state.P = 1e-6 * eye(7); % Give 1cm error;
+        otherwise
+            error('??? Unknown motion model ''%s''.',Rob.motion);
+    end
+    
     [Rob(rob),Lmk,Trj(rob),Frm(rob,:),Fac] = addKeyFrame(...
         Rob(rob),       ...
         Lmk,            ...

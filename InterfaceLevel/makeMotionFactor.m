@@ -22,12 +22,12 @@ Fac.state.r1 = Frm_old.state.r;
 Fac.state.r2 = Frm_new.state.r;
 
 % Project into manifold, 7DoF --> 6DoF
-[e, V_x] = qpose2vpose(factorRob.state.x);
-V = V_x * factorRob.state.P * V_x';
+[e, V_x] = qpose2vpose(factorRob.state.x(1:7));
+V = V_x * factorRob.state.P(1:7,1:7) * V_x';
 
 % Measurement is the straight data
-Fac.meas.y = factorRob.state.x;
-Fac.meas.R = factorRob.state.P;
+Fac.meas.y = factorRob.state.x(1:7);
+Fac.meas.R = factorRob.state.P(1:7);
 % Fac.meas.W = []; % measurement information matrix
 
 % Expectation has zero covariance -- and info in not defined
