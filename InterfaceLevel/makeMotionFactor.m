@@ -30,7 +30,7 @@ Fac.meas.y = factorRob.state.x(1:7);
 Fac.meas.R = factorRob.state.P(1:7,1:7);
 % Fac.meas.W = []; % measurement information matrix
 
-% Expectation has zero covariance -- and info in not defined
+% Expectation has zero covariance -- and info is not defined
 Fac.exp.e = Fac.meas.y; % expectation
 Fac.exp.E = zeros(size(Fac.meas.R)); % expectation cov
 %     Fac.exp.W = Fac.meas.W; % expectation information matrix

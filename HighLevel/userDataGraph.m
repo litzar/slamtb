@@ -33,12 +33,12 @@
 Time = struct(...
   'dt',                   .1,...          % sampling time, seconds
   'firstFrame',           1,...           % first frame #
-  'lastFrame',            800);           % last frame #
+  'lastFrame',            1000);           % last frame #
 
 % Simulated world
 %   - Simulation landmark sets, playground dimensions
 World = struct(...
-  'points',           thickCloister(-6,6,-6,6,1,7),... % 3d point landmarks - see THICKCLOISTER. 
+  'points',           thickCloister(-6,6,-6,6,1,3),... % 3d point landmarks - see THICKCLOISTER. 
   'segments',         []);  % 3D segments - see HOUSE. 
     
 % Robot things with their controls
@@ -48,39 +48,48 @@ World = struct(...
 %       'odometry'    6D Odometry model
 %       'inertial'    6D IMU-based model
 %   - See EULERANGLES for orientations specifications.
-Robot{1} = struct(...                           % VELOCITY EXAMPLE
-    'id',                 1,...                 % robot identifier
-    'name',               'Dala',...            % robot name
-    'type',               'atrv',...            % type of robot
-    'motion',             'constVel',...        % motion model
-    'position',           [0;-5;0],...          % robot position in map
-    'orientationDegrees', [0;0;0],...           % orientation, in degrees, [roll; pitch; yaw].
-    'positionStd',        [0.9;0.9;0.0001],...  % position error, std
-    'orientationStd',     [0.1;0.1;0.0001],...  % orient. error, std, in degrees
-    'velocity',           [0;0;0],...           % lin. velocity
-    'angularVelDegrees',  [0;0;0],...           % ang. velocity, in degrees
-    'velStd',             [0.01;0.01;0.001],... % lin. vel. error, std
-    'angVelStd',          [0.01;0.01;0.001],... % ang. vel. error, std, degrees
-    'dv',                 [0.001;0.001;0],...   % velocity increment
-    'dwDegrees',          [1;0;0],...           % ang. vel. increment, degrees
-    'dvStd',              [0.001;0.001;0],...   % vel perturbation std
-    'dwStd',              [0.001;0.001;0]);     % ang vel pert. std, degrees
 
-% Robot{1} = struct(...                  % ODOMETRY EXAMPLE
-%   'id',                 1,...           % robot identifier
-%   'name',               'Dala',...      % robot name
-%   'type',               'atrv',...      % type of robot
-%   'motion',             'odometry',...  % motion model
-%   'position',           [0;-5;0],...     % robot position in map
-%   'orientationDegrees', [0;0;0],...     % orientation, in degrees, [roll; pitch; yaw].
-%   'positionStd',        [0;0;0],...     % position error, std
-%   'orientationStd',     [0;0;0],...     % orient. error, std, in degrees
-%   'dx',                 [.08;0;0],...     % position increment
-%   'daDegrees',          [0;0;.9],...     % angle increment, degrees
-%   'dxStd',              0.03*[1;1;1],...  % odo linear error std
-%   'daStd',              0.3*[1;1;1]);      % odo ang error std, degrees
+% Easy switch for comparing between odometry/velocity control.
+velocity_control = 1;
 
-% Robot{2} = struct(...                  % ODOMETRY EXAMPLE
+if (velocity_control)
+    
+    Robot{1} = struct(...                           % VELOCITY EXAMPLE
+        'id',                 1,...                 % robot identifier
+        'name',               'Dala',...            % robot name
+        'type',               'atrv',...            % type of robot
+        'motion',             'constVel',...        % motion model
+        'position',           [0;-5;0],...          % robot position in map
+        'orientationDegrees', [0;0;0],...           % orientation, in degrees, [roll; pitch; yaw].
+        'positionStd',        [0.9;0.9;0.01],...     % position error, std
+        'orientationStd',     [0.00001;0.00001;0.00001],...           % orient. error, std, in degrees
+        'velocity',           [0;0;0],...           % lin. velocity
+        'angularVelDegrees',  [0;0;0],...           % ang. velocity, in degrees
+        'velStd',             [0.0001;0.0001;0.000001],... % lin. vel. error, std
+        'angVelStd',          [0.0001;0.0001;0.000001],... % ang. vel. error, std, degrees
+        'dv',                 [0;0;0],...   % velocity increment
+        'dwDegrees',          [0;0;0],...           % ang. vel. increment, degrees
+        'dvStd',              [0;0;0],...   % vel perturbation std
+        'dwStd',              [0;0;0]);     % ang vel pert. std, degrees
+else
+    
+    Robot{1} = struct(...                  % ODOMETRY EXAMPLE
+        'id',                 1,...           % robot identifier
+        'name',               'Dala',...      % robot name
+        'type',               'atrv',...      % type of robot
+        'motion',             'odometry',...  % motion model
+        'position',           [0;-5;0],...     % robot position in map
+        'orientationDegrees', [0;0;0],...     % orientation, in degrees, [roll; pitch; yaw].
+        'positionStd',        [0.9;0.9;0],...     % position error, std
+        'orientationStd',     [0;0;0],...     % orient. error, std, in degrees
+        'dx',                 [.08;0;0],...     % position increment
+        'daDegrees',          [0;0;.9],...     % angle increment, degrees
+        'dxStd',              0.03*[1;1;1],...  % odo linear error std
+        'daStd',              0.3*[1;1;1]);      % odo ang error std, degrees
+    
+end
+
+% Robot{3} = struct(...                  % ODOMETRY EXAMPLE
 %   'id',                 2,...           % robot identifier
 %   'name',               'Dala',...      % robot name
 %   'type',               'atrv',...      % type of robot

@@ -16,7 +16,7 @@ switch Rob.motion
         Rob.state.x(1:7) = vpose2qpose(zeros(6,1));
         Rob.frame.x = Rob.state.x;
         Rob.frame = updateFrame(Rob.frame);
-        %Rob.state.P = zeros(13,13);        
+       % Rob.state.P = zeros(13,13);        
         
         
     case  {'odometry'}  % 3D odometry
